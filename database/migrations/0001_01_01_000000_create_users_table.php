@@ -14,10 +14,16 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            $table->string('referral_code')->unique()->nullable();
+            $table->string('referred_by')->nullable();
+            $table->decimal('total_wealth', 15, 2)->default(0.00);
+            $table->decimal('available_balance', 15, 2)->default(0.00);
+            $table->decimal('on_trade_balance', 15, 2)->default(0.00);
+            $table->enum('status', ['active', 'blocked', 'trades_not_allowed', 'pending_approval'])->default('pending_approval');
+            $table->enum('role', ['user', 'admin'])->default('user');
             $table->timestamps();
         });
 
