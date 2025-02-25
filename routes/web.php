@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LinkedInController;
 use Illuminate\Support\Facades\Session;
 use Twilio\Rest\Client;
 use Twilio\TwiML\MessagingResponse;
@@ -369,3 +370,8 @@ Route::get('/chats-with-names', function () {
         'items'  => $chatsWithNames,
     ]);
 });
+
+
+
+
+Route::post('/send-message', [LinkedInController::class, 'sendMessage']);
